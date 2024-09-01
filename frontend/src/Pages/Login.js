@@ -1,11 +1,10 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./Login.css";
 
 export default function Login() {
-    const [response, setResponse] = useState(0);
     const [email, setEmail] = useState(0);
     const [password, setPassword] = useState(0);
     const navigate = useNavigate();
@@ -16,11 +15,24 @@ export default function Login() {
 
     const onChangePassword = (e) => {
         setPassword(e.target.value);
-
     }
 
     const login = () => {
-        console.log("Logging in!");
+        axios.post("http://localhost:8080/login", {
+            email: email,
+            password: password
+        }).then((response) => {
+            sessionStorage.setItem("sessionId", response?.data?.sessionId);
+
+            if (sessionStorage.getItem("sessionId") !== "undefined") {
+                navigate("home");
+            } else {
+                console.log("sessionId is undefined");
+                alert("Usuário ou senha incorreta!");
+            }
+        }).catch((error) => {
+            console.error(error);
+        })
     }
 
     const register = () => {
