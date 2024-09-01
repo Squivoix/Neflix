@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #000;
     color: #FFF;
@@ -48,8 +53,9 @@ input::placeholder {
     border: solid #FFF 1px;
 }
 
-.loginSection text {
+.loginSection p {
     width: 86%;
+    margin-bottom: 10px;
     font-size: 32px;
     font-weight: bold;
 }
