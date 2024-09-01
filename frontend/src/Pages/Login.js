@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { VerifyLogin } from "../Api.js";
 
 import "./Login.css";
 
@@ -17,22 +17,15 @@ export default function Login() {
         setPassword(e.target.value);
     }
 
-    const login = () => {
-        axios.post("http://localhost:8080/login", {
-            email: email,
-            password: password
-        }).then((response) => {
-            sessionStorage.setItem("sessionId", response?.data?.sessionId);
+    const login = async () => {
+        await VerifyLogin(email, password);
 
-            if (sessionStorage.getItem("sessionId") !== "undefined") {
-                navigate("home");
-            } else {
-                console.log("sessionId is undefined");
-                alert("Usuário ou senha incorreta!");
-            }
-        }).catch((error) => {
-            console.error(error);
-        })
+        if (sessionStorage.getItem("sessionId") !== "undefined") {
+            navigate("home");
+        } else {
+            console.log("sessionId is undefined");
+            alert("Usuário ou senha incorreta!");
+        }
     }
 
     const register = () => {
@@ -43,7 +36,7 @@ export default function Login() {
         <main>
             <img className="backgroundImage" src="/images/background.jpg" alt="Blured Background" ></img>
             <section className="logoSection">
-                <img className="logo" src="/images/logo.png" alt="Netflix Logo"/>
+                <img className="logo" src="/images/logo.png" alt="Netflix Logo" />
             </section>
             <section className="loginSection">
                 <section className="loginForm">
