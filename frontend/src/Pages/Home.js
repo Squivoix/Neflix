@@ -3,8 +3,6 @@ import Nav from "./Components/Nav.js";
 import Banner from "./Components/Banner.js";
 import { categories } from '../Api.js';
 
-import "./Home.css";
-
 export default function Home() {
     return (
         <>

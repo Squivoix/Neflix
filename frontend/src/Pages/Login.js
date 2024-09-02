@@ -29,7 +29,7 @@ export default function Login() {
     }
 
     const register = () => {
-        console.log("Route to register!");
+        navigate("register");
     }
 
     return (
@@ -41,8 +41,8 @@ export default function Login() {
             <section className="loginSection">
                 <section className="loginForm">
                     <p>Entrar</p>
-                    <input className="emailInput form" type="text" placeholder="Email ou número de telefone" onChange={onChangeEmail} />
-                    <input className="passwordInput form" type="text" placeholder="Senha" onChange={onChangePassword} />
+                    <input className="email form input" type="text" placeholder="Email" onChange={onChangeEmail} />
+                    <input className="password form input" type="password" placeholder="Senha" onChange={onChangePassword} />
                     <input className="loginButton form" type="button" value="Entrar" onClick={login} />
                     <input className="registerButton form" type="button" value="Registrar" onClick={register} />
                 </section>

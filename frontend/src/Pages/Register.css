@@ -45,21 +45,21 @@ input::placeholder {
     margin: 50px;
 }
 
-.loginSection {
+.registerSection {
     padding: 25px;
     width: 400px;
     background-color: #0009;
     border: solid #FFF 1px;
 }
 
-.loginSection p {
+.registerSection p {
     width: 86%;
     margin-bottom: 10px;
     font-size: 32px;
     font-weight: bold;
 }
 
-.loginForm {
+.registerForm {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -76,21 +76,22 @@ input::placeholder {
     color: #FFF;
 }
 
-.loginButton {
+.registerNewUserButton {
     background-color: #F00;
     border: solid #F00 1px;
 }
 
-.loginButton:hover {
+.registerNewUserButton:hover {
     filter: grayscale(25%);
 }
 
-.registerButton {
+.cancelButton {
     background-color: #7776;
     border: solid #7771 1px;
 }
 
-.registerButton:hover {
+.cancelButton:hover {
     background-color: #7774;
     border: solid #7771 1px;
 }
+

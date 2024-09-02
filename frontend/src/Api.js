@@ -56,6 +56,18 @@ export const VerifyLogin = async (email, password) => {
     })
 }
 
+export const RegisterNewUser = async (email, password) => {
+    return await axios.post("http://localhost:8080/register", {
+        email: email,
+        password: password
+    }).then((response) => {
+        return response.data;
+    }).catch((error) => {
+        console.log("An error has ocurred: " + error);
+        return false;
+    })
+}
+
 export const getMoviesData = async (path, filter) => {
     return await axios.get("http://localhost:8080/movies", {
         headers: {

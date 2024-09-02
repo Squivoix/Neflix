@@ -54,6 +54,19 @@ app.post("/login", (req, res) => {
     }
 })
 
+app.post("/register", (req, res) => {
+    let canRegister = true;
+
+    data.users.forEach((user) => {
+        if (req.body.email == user.email) {
+            canRegister = false;
+        }
+    })
+
+    data.users.push({ id: 1, name: "", email: req.body.email, password: req.body.password })
+    res.send(canRegister);
+})
+
 app.get("/movies", async (req, res) => {
     let URI = `${DNS}${req.headers.path}?api_key=${API_KEY}${req.headers.filter}`;
     let result = await fetch(URI);
