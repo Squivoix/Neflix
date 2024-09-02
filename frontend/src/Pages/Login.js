@@ -22,6 +22,7 @@ export default function Login() {
 
         if (sessionStorage.getItem("sessionId") !== "undefined") {
             navigate("home");
+            console.log(sessionStorage);
         } else {
             console.log("sessionId is undefined");
             alert("Usuário ou senha incorreta!");

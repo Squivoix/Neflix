@@ -12,7 +12,7 @@ const DNS = "https://api.themoviedb.org/3";
 
 const data = {
     users: [
-        { id: 1, name: "Victor", email: "victor@email.com", password: "1234" }
+        { id: 1, name: "Victor", email: "victor@email.com", password: "1234", age: 18 }
     ]
 }
 
@@ -45,9 +45,11 @@ app.post("/login", (req, res) => {
 
         sessionData.loggedIn = true;
         sessionData.userId = loggedUser.id;
+        sessionData.age = loggedUser.age;
 
         res.send({
-            sessionId: token
+            sessionId: token,
+            age: loggedUser.age
         });
     } else {
         res.send("Error");
@@ -63,7 +65,7 @@ app.post("/register", (req, res) => {
         }
     })
 
-    data.users.push({ id: 1, name: "", email: req.body.email, password: req.body.password })
+    data.users.push({ id: 1, name: "", email: req.body.email, password: req.body.password, age: 16 })
     res.send(canRegister);
 })
 
@@ -71,6 +73,15 @@ app.get("/movies", async (req, res) => {
     let URI = `${DNS}${req.headers.path}?api_key=${API_KEY}${req.headers.filter}`;
     let result = await fetch(URI);
     let data = await result.json();
+
+    if (req.headers.age >= 18) {
+        await data.results.forEach((movie) => {
+            if (movie.adult) {
+                console.log(`Movie ${movie}, has been filtered!`)
+                data.results.pop(movie);
+            }
+        })
+    }
 
     res.send(data);
 });

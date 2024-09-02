@@ -51,6 +51,7 @@ export const VerifyLogin = async (email, password) => {
         password: password
     }).then((response) => {
         sessionStorage.setItem("sessionId", response?.data?.sessionId);
+        sessionStorage.setItem("age", response?.data?.age);
     }).catch((error) => {
         console.error(error);
     })
@@ -72,10 +73,11 @@ export const getMoviesData = async (path, filter) => {
     return await axios.get("http://localhost:8080/movies", {
         headers: {
             path: path,
-            filter: filter
+            filter: filter,
+            age: sessionStorage.getItem("age")
         }
     }).then((result) => {
-
+        console.log(result.data);
         return result.data;
     });
 }
