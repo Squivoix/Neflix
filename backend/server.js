@@ -7,6 +7,9 @@ let app = express();
 
 const secretKey = "secretKey";
 
+const API_KEY = "264bb09ec4d858065cfb8860838a32ff";
+const DNS = "https://api.themoviedb.org/3";
+
 const data = {
     users: [
         { id: 1, name: "Victor", email: "victor@email.com", password: "1234" }
@@ -14,7 +17,7 @@ const data = {
 }
 
 const generateToken = (userId) => {
-    return jwt.sign({ userId }, secretKey, {expiresIn: 60 * 60});
+    return jwt.sign({ userId }, secretKey, { expiresIn: 60 * 60 });
 }
 
 app.use(cors());
@@ -26,7 +29,6 @@ app.use(session({
 }))
 
 app.post("/login", (req, res) => {
-    console.log(req.body);
     let loggedIn = false;
     let loggedUser;
 
@@ -51,5 +53,13 @@ app.post("/login", (req, res) => {
         res.send("Error");
     }
 })
+
+app.get("/movies", async (req, res) => {
+    let URI = `${DNS}${req.headers.path}?api_key=${API_KEY}${req.headers.filter}`;
+    let result = await fetch(URI);
+    let data = await result.json();
+
+    res.send(data);
+});
 
 app.listen(8080);
